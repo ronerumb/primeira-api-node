@@ -19,8 +19,7 @@ class UserController{
     return res.status(400).json({
         message:'Dados invalidos',
         error: err.errors,
-    });
-   
+    });   
 
    };
 
