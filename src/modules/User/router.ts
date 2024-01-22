@@ -4,8 +4,9 @@ import { userController } from "./controller/user-controller";
 
 const router: Router = Router();
 
+
 const baseUrl = '/user';
 
-router.get(`${baseUrl}/read`,userController.read);
+router.post(`${baseUrl}`,userController.create);
 
 export const userRouter = router;
