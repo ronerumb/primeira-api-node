@@ -2,6 +2,9 @@ import { PrismaClient } from '@prisma/client';
 import {Request , Response} from 'express';
 import { prismaConnect } from 'prismaConn';
 import bcrypt from 'bcrypt';
+import { UtilsFileUser } from '../utils/utils-file';
+import { json } from 'stream/consumers';
+import { error } from 'console';
 
 class UserService{
  public async create(name:string, email:string ,password:string){
@@ -26,8 +29,82 @@ class UserService{
             email:true
         }
     });
+
+    UtilsFileUser.createFolderUser(create.id);
     return create;
  }
+
+ public async read(paramsId:string){
+    const findUser = await prismaConnect.user.findUnique({
+        where: {
+            id : paramsId,
+        },
+        select:{
+            id : true,
+            name: true,
+            email: true
+        }
+    });
+    if(!findUser){
+        throw new Error('Usuario não econtrado');
+    }
+
+   
+    
+    return findUser;
+ }
+
+
+ public async update(paramsId:string, name:string){
+    const findUser = await prismaConnect.user.findUnique({
+        where: {
+            id : paramsId,
+        }     
+    });
+    if(!findUser){
+        throw new Error('Usuario não econtrado');
+    }
+    const update = prismaConnect.user.update({
+        where: {
+            id: paramsId,
+        },
+        data: {
+            name: name,
+        },
+        select: {
+            id: true,
+            name: true,
+            email:true,
+        }
+    })
+
+
+   
+    
+    return update;
+ }
+ public async delete(paramsId:string){
+    try {
+        
+        UtilsFileUser.deleteFolderUser(paramsId);
+        return await prismaConnect.user.delete({
+            where: {
+                id: paramsId,
+            }
+        })
+        
+    } catch (err:any) {
+        throw new Error('Dados não encontrados');
+        
+    }
+ 
+   
+
+   
+    
+  
+ }
+
 }
 
 
