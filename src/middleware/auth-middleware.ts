@@ -38,6 +38,8 @@ export class MiddlewareAuth{
         });
       }
 
+      req.tokenUserId = decoded.id;
+
         next();
     }
 }

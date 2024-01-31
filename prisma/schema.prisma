@@ -19,6 +19,7 @@ model User {
   updateAt DateTime @updatedAt
 
   resetPasswordSecret ResetPasswordSecret?
+  userClient UserClient[]
 }
 
 model ResetPasswordSecret{
@@ -26,4 +27,16 @@ model ResetPasswordSecret{
   secret Int
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
+}
+
+model UserClient {
+  id String @id @default(uuid())
+  name String
+  email String?
+  phone Int?
+  createdAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id] , onDelete: Cascade)
+  userId String
 }

@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import {Request , Response} from 'express';
 import { prismaConnect } from 'prismaConn';
 import bcrypt from 'bcrypt';
-import { UtilsFileUser } from '../utils/file-utils';
+import { UtilsFileUser } from '../../../utils/file-utils';
 import { json } from 'stream/consumers';
 import { error } from 'console';
 
