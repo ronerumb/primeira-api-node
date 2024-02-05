@@ -3,6 +3,7 @@ import path from 'node:path';
 
 import moment from 'moment';
 import { prismaConnect } from 'prismaConn';
+import { UtilsFileUser } from 'utils/file-utils';
 
 
 class UserClientFilesService {
@@ -48,7 +49,7 @@ class UserClientFilesService {
         });
     
         if (!findUserClient) {
-          throw new Error(EStatusErrors.E404);
+          throw new Error('Não encontrado');
         }
     
         return findUserClient;
@@ -73,7 +74,7 @@ class UserClientFilesService {
         });
     
         if (!findAll) {
-          throw new Error(EStatusErrors.E404);
+          throw new Error('Não encontrado');
         }
     
         let monthRecords: Array<number> = [];
@@ -119,7 +120,7 @@ class UserClientFilesService {
         });
     
         if (!find) {
-          throw new Error(EStatusErrors.E404);
+          throw new Error('Não encontrado');
         }
         const update = await prismaConnect.userClientFiles.update({
           where: {
@@ -152,7 +153,7 @@ class UserClientFilesService {
         });
     
         if (!find) {
-          throw new Error(EStatusErrors.E404);
+          throw new Error('Não encontrado');
         }
     
         const deleteUserClientFile = await prismaConnect.userClientFiles.delete({
