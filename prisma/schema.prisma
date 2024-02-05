@@ -20,6 +20,7 @@ model User {
 
   resetPasswordSecret ResetPasswordSecret?
   userClient UserClient[]
+  userClientFiles UserClientFiles[]
 }
 
 model ResetPasswordSecret{
@@ -39,4 +40,25 @@ model UserClient {
 
   user User @relation(fields: [userId], references: [id] , onDelete: Cascade)
   userId String
+
+  userClientFiles UserClientFiles[]
+}
+
+
+model UserClientFiles {
+  id String @id @default(uuid())
+  name String
+  date DateTime
+  file String
+  description String?
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+
+  userClient UserClient @relation(fields: [userClientId], references: [id], onDelete: Cascade)
+  userClientId String
+
 }

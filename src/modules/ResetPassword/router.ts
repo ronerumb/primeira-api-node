@@ -10,7 +10,7 @@ const baseUrl = '/reset-password';
 
 router.post(`${baseUrl}`, resetPasswordController.validadeUser);
 router.patch(`${baseUrl}`, resetPasswordController.resetPassword);
-router.post(`${baseUrl}/validade`, resetPasswordController.validadeSecurityCode);
+router.post(`${baseUrl}/validade`, resetPasswordController.validateSecurityCode);
 
 
 export const resetPasswordRouter = router;

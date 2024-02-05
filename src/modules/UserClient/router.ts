@@ -9,7 +9,7 @@ const router: Router = Router();
 const baseUrl = '/user-client';
 
 
-router.use(`${baseUrl}/:id`,MiddlewareAuth.authenticate)
+router.use(`${baseUrl}`,MiddlewareAuth.authenticate)
 router.post(`${baseUrl}`,userClientController.create);
 router.get(`${baseUrl}`,userClientController.listAll);
 router.get(`${baseUrl}/:id`,userClientController.read);
